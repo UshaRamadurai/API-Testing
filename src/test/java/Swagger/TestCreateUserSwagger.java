@@ -27,7 +27,7 @@ public class TestCreateUserSwagger {
         CreateUserResponse user1 =
                 given().
                         contentType(ContentType.JSON).body(request).
-                        when().
+                        when().log().all().
                         post("https://petstore.swagger.io/v2/user").as(CreateUserResponse.class);
         user1.printResponseBody();
 
@@ -50,15 +50,15 @@ public class TestCreateUserSwagger {
         given().
                 contentType(ContentType.JSON).body(request).
                 when().
-                put("https://petstore.swagger.io/v2/users/User12").
-                then().assertThat().statusCode(404).extract().response().prettyPrint();
+                put("https://petstore.swagger.io/v2/user/User12").
+                then().assertThat().statusCode(200).extract().response().prettyPrint();
 
         //validating for delete
         given().
                 contentType(ContentType.JSON).body(request).
                 when().
-                delete("https://petstore.swagger.io/v2/users/User12").
-                then().assertThat().statusCode(404).extract().response().prettyPrint();
+                delete("https://petstore.swagger.io/v2/user/User12").
+                then().assertThat().statusCode(200).extract().response().prettyPrint();
 
     }
     @Test
